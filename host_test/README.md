@@ -45,6 +45,29 @@ This component's `CMakeLists.txt` is responsible for:
    ./build/test_power_control.elf
    ```
 
+## Code Coverage
+
+You can generate code coverage reports (in `.info` format) using `lcov`.
+
+### Generating Coverage
+
+1. Build with coverage enabled:
+   ```bash
+   idf.py -DENABLE_COVERAGE=ON build
+   ```
+
+2. Run the coverage target:
+   ```bash
+   ninja generate_coverage
+   ```
+   *Note: If you use `idf.py build`, you can run `ninja -C build generate_coverage`.*
+
+This will:
+- Clean up old `.gcda` files.
+- Run the test suite.
+- Capture coverage data and filter it to include only the component source files (excluding tests and external libraries).
+- Generate `coverage_filtered.info` in the `build` directory.
+
 ## Why FetchContent?
 
 - **Clean Repo**: No need to store thousands of lines of external code.
