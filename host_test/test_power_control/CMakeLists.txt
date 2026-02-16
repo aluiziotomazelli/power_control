@@ -24,11 +24,11 @@ if(ENABLE_COVERAGE AND IDF_TARGET STREQUAL "linux")
         # Run the test binary
         COMMAND ./test_power_control.elf
         # Capture coverage data
-        COMMAND ${LCOV_PATH} --capture --directory . --output-file coverage.info --rc branch_coverage=1 --ignore-errors mismatch
+        COMMAND ${LCOV_PATH} --capture --directory . --output-file coverage.info --rc branch_coverage=1 --ignore-errors mismatch,inconsistent
         # Filter to include only files from the component directory, excluding tests and external libs.
-        COMMAND ${LCOV_PATH} --extract coverage.info "*/power_control/power_control.cpp" "*/power_control/gpio_hal.cpp" "*/power_control/include/*" --output-file coverage_filtered.info --rc branch_coverage=1 --ignore-errors mismatch,unused,empty
+        COMMAND ${LCOV_PATH} --extract coverage.info "*/power_control/power_control.cpp" "*/power_control/gpio_hal.cpp" "*/power_control/include/*" --output-file coverage_filtered.info --rc branch_coverage=1 --ignore-errors mismatch,inconsistent,unused,empty
         # List the results for a quick overview in the console
-        COMMAND ${LCOV_PATH} --list coverage_filtered.info --rc branch_coverage=1 --ignore-errors mismatch,unused,empty
+        COMMAND ${LCOV_PATH} --list coverage_filtered.info --rc branch_coverage=1 --ignore-errors mismatch,inconsistent,unused,empty
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Running tests and generating filtered coverage report"
     )
