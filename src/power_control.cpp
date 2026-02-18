@@ -104,30 +104,49 @@ esp_err_t PowerControl::deinit()
         return ESP_OK;
     }
 
-    // Force GPIO low before deinitialization for safety
+    esp_err_t final_ret = ESP_OK;
     esp_err_t ret;
+
+    // Force GPIO low before deinitialization for safety
     ret = hal_.set_level(gpio_, 0);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to set GPIO low during deinit");
-        return ret;
+        final_ret = ret; // Store error but continue
     }
 
     // Reset GPIO (returns to high-impedance state)
     ret = hal_.reset_pin(gpio_);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to reset GPIO during deinit");
-        return ret;
+        if (final_ret == ESP_OK) {
+            final_ret = ret; // Only override if no previous error
+        }
     }
 
+    // Mark as deinitialized regardless of hardware errors
     initialized_ = false;
-    is_on_ = false; // Reset internal state also
-    ESP_LOGI(TAG, "Power control deinitialized on GPIO %d", gpio_);
+    is_on_ = false;
+    ESP_LOGI(
+        TAG,
+        "Power control deinitialized on GPIO %d (status: %s)",
+        gpio_,
+        final_ret == ESP_OK ? "OK" : "partial failure");
 
-    return ret;
+    return final_ret;
 }
 
 esp_err_t PowerControl::set_drive_capability(gpio_drive_cap_t strength)
 {
+    // Check if the power control is initialized
+    if (!initialized_) {
+        ESP_LOGE(TAG, "Power control not initialized");
+        return ESP_ERR_INVALID_STATE;
+    }
+    esp_err_t ret = hal_.set_drive_capability(gpio_, strength);
+    if (ret != ESP_OK) {
+        ESP_LOGE(TAG, "Failed to set GPIO %d drive capability to %d", gpio_, strength);
+        return ret;
+    }
     ESP_LOGD(TAG, "GPIO %d drive capability set to %d ", gpio_, strength);
-    return hal_.set_drive_capability(gpio_, strength);
+    return ret;
 }
