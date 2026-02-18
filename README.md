@@ -23,8 +23,6 @@ A component for controlling power to external devices via GPIO, specifically des
     - [PNP Transistor Control](#pnp-transistor-control)
     - [Multiple Sensors](#multiple-sensors)
   - [API Reference](#api-reference)
-    - [Constructor](#constructor)
-    - [Core Methods](#core-methods)
   - [Integration Notes](#integration-notes)
     - [Dependency Injection](#dependency-injection)
     - [Current ESP-IDF Integration](#current-esp-idf-integration)
@@ -263,27 +261,7 @@ sensor1.turn_off();
 
 ## API Reference
 
-### Constructor
-```cpp
-PowerControl(IGpioHAL &hal, gpio_num_t gpio, bool inverted_logic = false, bool initial_on = false)
-```
-- `hal`: Reference to GPIO HAL implementation
-- `gpio`: GPIO pin number
-- `inverted_logic`: `true` for active LOW, `false` for active HIGH
-- `initial_on`: Initial state after `init()`
-
-### Core Methods
-```cpp
-esp_err_t init();                    // Initialize hardware
-esp_err_t deinit();                  // Deinitialize and set safe state
-esp_err_t turn_on();                 // Turn output ON
-esp_err_t turn_off();                // Turn output OFF
-esp_err_t toggle();                  // Toggle current state
-esp_err_t set_drive_capability(gpio_drive_cap_t strength);  // Adjust current
-bool is_on() const;                  // Get current logical state
-bool is_initialized() const;         // Check initialization status
-gpio_num_t get_pin() const;          // Get GPIO pin number
-```
+For a detailed description of the component's interface and implementation details, see [API.md](API.md).
 
 ## Integration Notes
 
