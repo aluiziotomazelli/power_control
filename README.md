@@ -29,7 +29,7 @@ A component for controlling power to external devices via GPIO, specifically des
     - [Testing](#testing)
   - [License](#license)
   - [Author](#author)
-  - [Version History](#version-history)
+  - [Changelog](#changelog)
 
 ## Overview
 
@@ -292,10 +292,6 @@ This component is licensed under the MIT License - see the LICENSE file for deta
 [github.com/aluiziotomazelli]
 
 
-## Version History
+## Changelog
 
-- **1.0.0** (2025-02-17): Initial release
-  - Basic power control functionality
-  - Support for normal/inverted logic
-  - Drive capability configuration
-  - Complete test suite
+For a history of changes to this project, see [CHANGELOG.md](CHANGELOG.md).
