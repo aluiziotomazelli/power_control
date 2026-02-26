@@ -7,6 +7,7 @@ idf_component_register(
     
     INCLUDE_DIRS 
         "include"
+        "include/interfaces"
     
     REQUIRES 
         driver
