@@ -6,4 +6,6 @@ include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 # We add the parent directory (the component root) to the component search path.
 set(EXTRA_COMPONENT_DIRS ../../)
 
+set(COMPONENTS main power_control)
+
 project(basic_usage)
