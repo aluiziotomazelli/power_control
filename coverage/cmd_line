@@ -1,0 +1,1 @@
+genhtml coverage_filtered.info --output-directory /home/german/dev/workspaces/idf-components/power_control/host_test/test_power_control/coverage --title 'test_power_control Component Coverage' --rc branch_coverage=1 --ignore-errors mismatch,inconsistent,unused
