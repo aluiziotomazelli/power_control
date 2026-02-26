@@ -1,35 +1,9 @@
 # Power Control Component
+[![ESP-IDF Build](https://github.com/aluiziotomazelli/power_control/actions/workflows/build.yml/badge.svg)](https://github.com/aluiziotomazelli/power_control/actions/workflows/build.yml)
+[![Host tests](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml/badge.svg)](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml)
+[![Coverage Report](https://img.shields.io/badge/coverage-report-blue)](https://aluiziotomazelli.github.io/power_control/coverage/index.html)
 
 A component for controlling power to external devices via GPIO, specifically designed for sensor applications in low-power systems.
-
-## Table of Contents
-
-- [Power Control Component](#power-control-component)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-  - [Typical Applications](#typical-applications)
-    - [Sensor Power Cycling](#sensor-power-cycling)
-    - [Ideal for:](#ideal-for)
-  - [Architecture](#architecture)
-  - [Operation Modes](#operation-modes)
-    - [Direct Drive](#direct-drive)
-    - [Transistor Drive](#transistor-drive)
-      - [NPN Transistor (Low-Side Switching)](#npn-transistor-low-side-switching)
-      - [PNP Transistor (High-Side Switching)](#pnp-transistor-high-side-switching)
-  - [Current Capability](#current-capability)
-  - [Usage Examples](#usage-examples)
-    - [Direct Sensor Control](#direct-sensor-control)
-    - [NPN Transistor Control](#npn-transistor-control)
-    - [PNP Transistor Control](#pnp-transistor-control)
-    - [Multiple Sensors](#multiple-sensors)
-  - [API Reference](#api-reference)
-  - [Integration Notes](#integration-notes)
-    - [Dependency Injection](#dependency-injection)
-    - [Current ESP-IDF Integration](#current-esp-idf-integration)
-    - [Testing](#testing)
-  - [License](#license)
-  - [Author](#author)
-  - [Changelog](#changelog)
 
 ## Overview
 
