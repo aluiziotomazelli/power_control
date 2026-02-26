@@ -53,20 +53,24 @@ You can generate code coverage reports (in `.info` format) using `lcov`.
 
 1. Build the test project (coverage is enabled by default for Linux):
    ```bash
+   # From host_test/test_power_control
    idf.py build
    ```
 
 2. Run the coverage target:
    ```bash
-   ninja generate_coverage
+   # Using idf.py (simplest)
+   idf.py build generate_coverage
+
+   # Or using cmake/ninja directly from the test project directory
+   cmake --build build --target generate_coverage
    ```
-   *Note: You can also run it via idf.py: `idf.py build generate_coverage`.*
 
 This will:
 - Clean up old `.gcda` files and previous reports.
 - Run the test suite.
 - Capture coverage data and filter it to include only the component source files (src and include), excluding tests and external libraries.
-- Generate an HTML report in the `coverage/` directory at the repository root.
+- Generate an HTML report in the `coverage/` directory at the test root folder.
 - Print a summary to the console.
 
 ## Why FetchContent?

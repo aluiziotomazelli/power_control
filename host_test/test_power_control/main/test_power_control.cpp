@@ -1,13 +1,10 @@
-#include "gpio_hal_interface.hpp"
-#include "power_control.hpp"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 
-#include "gpio_hal_interface.hpp"
-#include "power_control.hpp"
 #include "driver/gpio.h"
-#include "gmock/gmock.h"
-#include "gtest/gtest.h"
+
+#include "i_gpio_hal.hpp"
+#include "power_control.hpp"
 
 using ::testing::_;
 using ::testing::Field;
