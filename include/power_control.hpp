@@ -1,7 +1,7 @@
 #pragma once
 
-#include "gpio_hal_interface.hpp"
-#include "power_control_interface.hpp"
+#include "i_gpio_hal.hpp"
+#include "i_power_control.hpp"
 
 // ========================================
 // Power Control Implementation

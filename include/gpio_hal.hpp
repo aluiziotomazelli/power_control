@@ -1,6 +1,6 @@
 #pragma once
 
-#include "gpio_hal_interface.hpp"
+#include "i_gpio_hal.hpp"
 
 /**
  * @class GpioHAL
