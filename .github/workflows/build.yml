@@ -1,0 +1,26 @@
+name: ESP-IDF Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_firmware:
+    name: Build Firmware Example
+    runs-on: ubuntu-latest
+    container: espressif/idf:release-v5.5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build Firmware
+        shell: bash
+        working-directory: test_apps/build_test
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py build

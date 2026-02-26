@@ -1,0 +1,52 @@
+name: Host Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  host_tests:
+    name: Host Tests
+    runs-on: ubuntu-latest
+    container: espressif/idf:release-v5.5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Build all tests
+        shell: bash
+        working-directory: host_test/test_power_control
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py build
+          
+
+      - name: Run tests
+        shell: bash
+        working-directory: host_test/test_power_control
+        run: |
+          . $IDF_PATH/export.sh
+          ./build/test_power_control.elf
+
+
+      - name: Run coverage
+        shell: bash
+        working-directory: host_test/test_power_control
+        run: |
+          . $IDF_PATH/export.sh
+          idf.py generate_coverage
+
+
+      - name: Deploy coverage to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./host_test/test_power_control/coverage
+          publish_branch: gh-pages
+          destination_dir: ./coverage
+          keep_files: false
