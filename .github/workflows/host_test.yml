@@ -8,9 +8,13 @@ on:
 
 jobs:
   host_tests:
+    permissions:
+      contents: write
     name: Host Tests
     runs-on: ubuntu-latest
     container: espressif/idf:release-v5.5
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -25,14 +29,12 @@ jobs:
           . $IDF_PATH/export.sh
           idf.py build
           
-
       - name: Run tests
         shell: bash
         working-directory: host_test/test_power_control
         run: |
           . $IDF_PATH/export.sh
           ./build/test_power_control.elf
-
 
       - name: Run coverage
         shell: bash
@@ -41,11 +43,10 @@ jobs:
           . $IDF_PATH/export.sh
           idf.py generate_coverage
 
-
       - name: Deploy coverage to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ env.GITHUB_TOKEN }}
           publish_dir: ./host_test/test_power_control/coverage
           publish_branch: gh-pages
           destination_dir: ./coverage
