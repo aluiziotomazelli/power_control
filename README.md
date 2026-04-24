@@ -1,7 +1,7 @@
 # Power Control Component
 [![ESP-IDF Build](https://github.com/aluiziotomazelli/power_control/actions/workflows/build.yml/badge.svg)](https://github.com/aluiziotomazelli/power_control/actions/workflows/build.yml)
-[![Host tests](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml/badge.svg)](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml)
-[![Coverage Report](https://img.shields.io/badge/coverage-report-blue)](https://aluiziotomazelli.github.io/power_control/coverage/index.html)
+[![Host Tests](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml/badge.svg)](https://github.com/aluiziotomazelli/power_control/actions/workflows/host_test.yml)
+[![Coverage Report](https://img.shields.io/badge/coverage-report-blue)](https://aluiziotomazelli.github.io/power_control/index.html)
 
 A component for controlling power to external devices via GPIO, specifically designed for sensor applications in low-power systems.
 
