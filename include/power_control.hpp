@@ -8,6 +8,7 @@
 // Power Control Implementation
 // ========================================
 
+namespace power_control {
 /**
  * @class PowerControl
  * @brief Concrete implementation of IPowerControl using IGpioHAL
@@ -94,3 +95,4 @@ private:
     bool initialized_ = false; ///< Initialization state
     bool is_on_ = false;       ///< Current logical state
 };
+} // namespace power_control

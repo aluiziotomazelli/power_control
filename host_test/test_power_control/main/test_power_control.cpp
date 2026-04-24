@@ -10,6 +10,8 @@ using ::testing::_;
 using ::testing::Field;
 using ::testing::Return;
 
+using namespace power_control;
+
 class MockGpioHAL : public IGpioHAL
 {
 public:

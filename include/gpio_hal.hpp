@@ -2,6 +2,7 @@
 
 #include "i_gpio_hal.hpp"
 
+namespace power_control {
 /**
  * @class GpioHAL
  * @brief Concrete implementation of IGpioHAL using ESP-IDF driver
@@ -28,3 +29,4 @@ public:
         return gpio_set_drive_capability(gpio_num, strength);
     }
 };
+} // namespace power_control

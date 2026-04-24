@@ -6,6 +6,8 @@
 #include "gpio_hal.hpp"
 #include "power_control.hpp"
 
+namespace power_control {
+
 static const char *TAG = "PowerControl";
 
 PowerControl::PowerControl(IGpioHAL &hal, const gpio_num_t gpio, const bool inverted_logic, const bool initial_on)
@@ -150,3 +152,5 @@ esp_err_t PowerControl::set_drive_capability(gpio_drive_cap_t strength)
     ESP_LOGD(TAG, "GPIO %d drive capability set to %d ", gpio_, strength);
     return ret;
 }
+
+} // namespace power_control

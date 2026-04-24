@@ -3,6 +3,7 @@
 #include "esp_err.h"
 #include "driver/gpio.h"
 
+namespace power_control {
 /**
  * @interface IGpioHAL
  * @brief Hardware Abstraction Layer for GPIO operations
@@ -25,3 +26,4 @@ public:
     /** @internal */
     virtual esp_err_t set_drive_capability(const gpio_num_t gpio_num, gpio_drive_cap_t strength) = 0;
 };
+} // namespace power_control

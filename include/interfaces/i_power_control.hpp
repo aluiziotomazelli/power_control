@@ -8,6 +8,7 @@
 // Power Control Interface
 // ========================================
 
+namespace power_control {
 /**
  * @interface IPowerControl
  * @brief Interface for GPIO-based power/output control
@@ -185,3 +186,4 @@ public:
      */
     virtual gpio_num_t get_pin() const = 0;
 };
+} // namespace power_control

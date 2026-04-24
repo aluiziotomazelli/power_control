@@ -1,6 +1,8 @@
 #include "gpio_hal.hpp"
 #include "power_control.hpp"
 
+using namespace power_control;
+
 extern "C" void app_main(void)
 {
     GpioHAL gpio_hal;
