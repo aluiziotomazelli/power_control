@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Wrapped all classes and interfaces in `power_control` namespace to avoid naming conflicts.
+- `power_control.hpp` now internally includes `gpio_hal.hpp` for a cleaner application interface.
 
 ## [1.0.0] - 2025-02-17
 

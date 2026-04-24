@@ -3,7 +3,8 @@
 #include "freertos/task.h"
 #include "esp_log.h"
 #include "power_control.hpp"
-#include "gpio_hal.hpp"
+
+using namespace power_control;
 
 // Tag for logging
 static const char *TAG = "EXAMPLE";

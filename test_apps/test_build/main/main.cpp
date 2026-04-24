@@ -1,4 +1,3 @@
-#include "gpio_hal.hpp"
 #include "power_control.hpp"
 
 using namespace power_control;

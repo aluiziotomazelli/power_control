@@ -20,6 +20,8 @@ Key features:
 
 ### Sensor Power Cycling
 ```cpp
+using namespace power_control;
+
 // In low-power applications, power the sensor only during readings
 power.turn_on();      // Power up sensor
 vTaskDelay(10);       // Warm-up time (sensor-specific)
@@ -66,6 +68,8 @@ The component uses dependency injection for maximum testability and flexibility:
 For low-current sensors that can be powered directly from a GPIO pin (typically up to 20-40 mA depending on configuration).
 
 ```cpp
+using namespace power_control;
+
 // Direct drive configuration (normal logic, active HIGH)
 PowerControl direct_power(hal, GPIO_NUM_4, false, false);
 direct_power.init();
@@ -92,6 +96,8 @@ NPN transistors are used as low-side switches. The transistor turns on when the 
 
 **Configuration:**
 ```cpp
+using namespace power_control;
+
 // For NPN: HIGH = ON, LOW = OFF (normal logic)
 PowerControl npn_power(hal, GPIO_NUM_4, false, false);
 npn_power.turn_on();   // GPIO HIGH → transistor ON → load powered
@@ -109,6 +115,8 @@ PNP transistors are used for high-side switching, where the load is connected to
 
 **Configuration:**
 ```cpp
+using namespace power_control;
+
 // For PNP: LOW = ON, HIGH = OFF (inverted logic)
 PowerControl pnp_power(hal, GPIO_NUM_4, true, false);  // inverted_logic = true
 pnp_power.turn_on();   // GPIO LOW → transistor ON → load powered
@@ -143,7 +151,8 @@ power.set_drive_capability(GPIO_DRIVE_CAP_3);  // Increase current capability
 
 ```cpp
 #include "power_control.hpp"
-#include "gpio_hal.hpp"
+
+using namespace power_control;
 
 void app_main() {
     // Create HAL and PowerControl instances
@@ -174,6 +183,8 @@ void app_main() {
 ### NPN Transistor Control
 
 ```cpp
+using namespace power_control;
+
 // For driving higher current loads via NPN transistor
 GpioHAL hal;
 PowerControl load_power(hal, GPIO_NUM_5, false, false);  // normal logic
@@ -190,6 +201,8 @@ load_power.turn_off();  // GPIO LOW → transistor OFF
 ### PNP Transistor Control
 
 ```cpp
+using namespace power_control;
+
 // For high-side switching with PNP transistor
 GpioHAL hal;
 PowerControl load_power(hal, GPIO_NUM_5, true, false);  // inverted logic
@@ -205,6 +218,8 @@ load_power.turn_off();  // GPIO HIGH → transistor OFF
 ### Multiple Sensors
 
 ```cpp
+using namespace power_control;
+
 GpioHAL hal;
 
 // Different sensors with different configurations

@@ -120,6 +120,8 @@ PowerControl(IGpioHAL &hal, gpio_num_t gpio, bool inverted_logic = false, bool i
 | `inverted_logic`| `bool` | `true` for active LOW, `false` for active HIGH (default). |
 | `initial_on` | `bool` | Initial logical state after `init()` is called (default: `false`). |
 
+**Note:** All classes are located within the `power_control` namespace.
+
 **Note on Dependency Injection:**
 The `PowerControl` component does not create its own HAL. You must instantiate a concrete HAL (like `GpioHAL` for ESP-IDF) and pass it to the constructor. This allows for easier unit testing by injecting a Mock HAL.
 
