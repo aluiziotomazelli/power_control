@@ -14,14 +14,17 @@ public:
     ~GpioHAL() override = default;
 
     /** @copydoc IGpioHAL::reset_pin() */
-    esp_err_t reset_pin(const gpio_num_t pin) override;
+    esp_err_t reset_pin(const gpio_num_t pin) override { return gpio_reset_pin(pin); }
 
     /** @copydoc IGpioHAL::config() */
-    esp_err_t config(const gpio_config_t &config) override;
+    esp_err_t config(const gpio_config_t &config) override { return gpio_config(&config); }
 
     /** @copydoc IGpioHAL::set_level() */
-    esp_err_t set_level(const gpio_num_t pin, const bool level) override;
+    esp_err_t set_level(const gpio_num_t pin, const bool level) override { return gpio_set_level(pin, level); }
 
     /** @copydoc IGpioHAL::set_drive_capability() */
-    esp_err_t set_drive_capability(gpio_num_t gpio_num, gpio_drive_cap_t strength) override;
+    esp_err_t set_drive_capability(gpio_num_t gpio_num, gpio_drive_cap_t strength) override
+    {
+        return gpio_set_drive_capability(gpio_num, strength);
+    }
 };
