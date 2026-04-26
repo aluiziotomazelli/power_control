@@ -3,7 +3,6 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-#include "gpio_hal.hpp"
 #include "power_control.hpp"
 
 namespace power_control {
