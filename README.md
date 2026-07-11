@@ -150,13 +150,14 @@ power.set_drive_capability(GPIO_DRIVE_CAP_3);  // Increase current capability
 ### Direct Sensor Control
 
 ```cpp
+#include "hal_gpio.hpp"
 #include "power_control.hpp"
 
 using namespace power_control;
 
 void app_main() {
     // Create HAL and PowerControl instances
-    GpioHAL hal;
+    idf_hals::GpioHAL hal;
     PowerControl sensor_power(hal, GPIO_NUM_4, false, false);
     
     // Initialize
@@ -183,10 +184,13 @@ void app_main() {
 ### NPN Transistor Control
 
 ```cpp
+#include "hal_gpio.hpp"
+#include "power_control.hpp"
+
 using namespace power_control;
 
 // For driving higher current loads via NPN transistor
-GpioHAL hal;
+idf_hals::GpioHAL hal;
 PowerControl load_power(hal, GPIO_NUM_5, false, false);  // normal logic
 
 load_power.init();
@@ -201,10 +205,13 @@ load_power.turn_off();  // GPIO LOW → transistor OFF
 ### PNP Transistor Control
 
 ```cpp
+#include "hal_gpio.hpp"
+#include "power_control.hpp"
+
 using namespace power_control;
 
 // For high-side switching with PNP transistor
-GpioHAL hal;
+idf_hals::GpioHAL hal;
 PowerControl load_power(hal, GPIO_NUM_5, true, false);  // inverted logic
 
 load_power.init();
@@ -218,9 +225,12 @@ load_power.turn_off();  // GPIO HIGH → transistor OFF
 ### Multiple Sensors
 
 ```cpp
+#include "hal_gpio.hpp"
+#include "power_control.hpp"
+
 using namespace power_control;
 
-GpioHAL hal;
+idf_hals::GpioHAL hal;
 
 // Different sensors with different configurations
 PowerControl sensor1(hal, GPIO_NUM_4, false, false);  // Direct drive
@@ -255,8 +265,8 @@ For a detailed description of the component's interface and implementation detai
 ## Integration Notes
 
 ### Dependency Injection
-The component requires a `GpioHAL` instance to be injected. This design enables:
-- **Unit testing**: Use `MockGpioHAL` in tests
+The component requires a `idf_hals::GpioHAL` instance to be injected. This design enables:
+- **Unit testing**: Use `idf_hals::MockGpioHAL` in tests
 - **Flexibility**: Easy to port to different platforms
 - **Clear separation**: Hardware details isolated in HAL
 
