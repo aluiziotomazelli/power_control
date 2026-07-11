@@ -1,7 +1,6 @@
 #pragma once
 
-#include "gpio_hal.hpp"
-#include "i_gpio_hal.hpp"
+#include "interfaces/i_hal_gpio.hpp"
 #include "i_power_control.hpp"
 
 // ========================================
@@ -41,7 +40,7 @@ public:
      * @warning The GPIO pin must support output mode on the target hardware
      */
     PowerControl(
-        IGpioHAL &hal,
+        idf_hals::IGpioHAL &hal,
         const gpio_num_t gpio,
         const bool inverted_logic = false,
         const bool initial_on = false);
@@ -87,7 +86,7 @@ private:
      */
     esp_err_t apply_gpio(bool enable);
 
-    IGpioHAL &hal_;       ///< HAL instance for hardware access
+    idf_hals::IGpioHAL &hal_;       ///< HAL instance for hardware access
     gpio_num_t gpio_;     ///< GPIO pin number
     bool inverted_logic_; ///< true = active LOW, false = active HIGH
     bool initial_on_;     ///< Initial state to apply after init

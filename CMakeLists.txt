@@ -10,6 +10,7 @@ idf_component_register(
     
     REQUIRES 
         driver
+        idf_hals
 )
 
 if(IDF_TARGET STREQUAL "linux")

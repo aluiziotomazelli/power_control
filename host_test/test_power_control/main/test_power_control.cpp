@@ -3,7 +3,7 @@
 
 #include "driver/gpio.h"
 
-#include "i_gpio_hal.hpp"
+#include "mock_hal_gpio.hpp"
 #include "power_control.hpp"
 
 using ::testing::_;
@@ -11,21 +11,13 @@ using ::testing::Field;
 using ::testing::Return;
 
 using namespace power_control;
-
-class MockGpioHAL : public IGpioHAL
-{
-public:
-    MOCK_METHOD(esp_err_t, reset_pin, (gpio_num_t pin), (override));
-    MOCK_METHOD(esp_err_t, config, (const gpio_config_t &config), (override));
-    MOCK_METHOD(esp_err_t, set_level, (gpio_num_t pin, bool level), (override));
-    MOCK_METHOD(esp_err_t, set_drive_capability, (gpio_num_t gpio_num, gpio_drive_cap_t strength), (override));
-};
+using namespace idf_hals;
 
 // Fixture para reutilizar setup
 class PowerControlTest : public ::testing::Test
 {
 protected:
-    MockGpioHAL mock_gpio;
+    testing::NiceMock<MockGpioHAL> mock_gpio;
     const gpio_num_t TEST_PIN = GPIO_NUM_4;
 };
 
@@ -449,12 +441,12 @@ TEST_F(PowerControlTest, MultipleInstances_WorkIndependently)
 
     // Configure expectations for init for each instance
     EXPECT_CALL(mock_gpio, reset_pin(GPIO_NUM_4)).WillOnce(Return(ESP_OK));
-    EXPECT_CALL(mock_gpio, config(testing::Field(&gpio_config_t::pin_bit_mask, 1ULL << GPIO_NUM_4)))
+    EXPECT_CALL(mock_gpio, config(testing::Pointee(testing::Field(&gpio_config_t::pin_bit_mask, 1ULL << GPIO_NUM_4))))
         .WillOnce(Return(ESP_OK));
     EXPECT_CALL(mock_gpio, set_level(GPIO_NUM_4, false)).WillOnce(Return(ESP_OK));
 
     EXPECT_CALL(mock_gpio, reset_pin(GPIO_NUM_5)).WillOnce(Return(ESP_OK));
-    EXPECT_CALL(mock_gpio, config(testing::Field(&gpio_config_t::pin_bit_mask, 1ULL << GPIO_NUM_5)))
+    EXPECT_CALL(mock_gpio, config(testing::Pointee(testing::Field(&gpio_config_t::pin_bit_mask, 1ULL << GPIO_NUM_5))))
         .WillOnce(Return(ESP_OK));
     EXPECT_CALL(mock_gpio, set_level(GPIO_NUM_5, false)).WillOnce(Return(ESP_OK)); // inverted
 

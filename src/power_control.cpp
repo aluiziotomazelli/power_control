@@ -9,7 +9,7 @@ namespace power_control {
 
 static const char *TAG = "PowerControl";
 
-PowerControl::PowerControl(IGpioHAL &hal, const gpio_num_t gpio, const bool inverted_logic, const bool initial_on)
+PowerControl::PowerControl(idf_hals::IGpioHAL &hal, const gpio_num_t gpio, const bool inverted_logic, const bool initial_on)
     : hal_(hal)
     , gpio_(gpio)
     , inverted_logic_(inverted_logic)
@@ -47,7 +47,7 @@ esp_err_t PowerControl::init()
     io_conf.intr_type = GPIO_INTR_DISABLE;
 
     // Configure GPIO
-    ret = hal_.config(io_conf);
+    ret = hal_.config(&io_conf);
     if (ret != ESP_OK) {
         ESP_LOGE(TAG, "Failed to configure GPIO %d, error: %s", gpio_, esp_err_to_name(ret));
         return ret;

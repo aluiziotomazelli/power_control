@@ -5,10 +5,11 @@ list(APPEND EXTRA_COMPONENT_DIRS
     "../.."                              # The 'power_control' component being tested
     "../gtest"                           # The GTest wrapper component
     "$ENV{IDF_PATH}/tools/mocks/driver"  # Official ESP-IDF driver mocks
+    "../../external"                     # The external folder containing idf_hals
 )
 
 # Explicitly list the components to be included in the build.
-set(COMPONENTS main power_control)
+set(COMPONENTS main power_control idf_hals)
 
 # Standard ESP-IDF project configuration.
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)

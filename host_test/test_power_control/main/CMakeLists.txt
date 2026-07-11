@@ -4,9 +4,11 @@ idf_component_register(
         "test_power_control.cpp"
     INCLUDE_DIRS 
         "."
+        "../../../external/idf_hals/mocks"
     REQUIRES 
         gtest
         power_control
+        idf_hals
         
     WHOLE_ARCHIVE
 )
