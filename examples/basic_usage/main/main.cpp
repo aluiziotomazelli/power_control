@@ -2,6 +2,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "esp_log.h"
+#include "hal_gpio.hpp"
 #include "power_control.hpp"
 
 using namespace power_control;
@@ -27,7 +28,7 @@ extern "C" void app_main(void)
      * This design allows you to easily swap the hardware implementation or use a Mock
      * during unit testing.
      */
-    GpioHAL hal;
+    idf_hals::GpioHAL hal;
 
     /**
      * @brief PowerControl Instance
